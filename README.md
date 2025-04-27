@@ -9,9 +9,9 @@ info-java/27-05-2025. Cada nombre de branch (Excepto la main) tendra el siguient
 
 Ten en cuenta las siguientes herramientas e instalaciones : 
 
-1. JDK 21
-2. Git
-3. Maven-3.9.6
+1. [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+2. [Git](https://git-scm.com/)
+3. [Maven-3.9.6 o mayor](https://maven.apache.org/download.cgi)
 4. IDE : Visual Studio Code, IntelijIDEA, etc.
 
 ## Extensiones VSCODE
