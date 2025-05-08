@@ -1,0 +1,13 @@
+Dado el siguiente arreglo : 
+
+miArray2D = {
+    {1,2,3}, 
+    {4,5,6}, 
+    {7,8,9}
+};
+Calcule la suma de los elementos 
+que se encuentren en la diagonal
+
+================ NIVEL STONE CHAD =============
+Dado un arreglo de enteros, devuelva un arreglo por sin elementos repetidos.
+>:D
