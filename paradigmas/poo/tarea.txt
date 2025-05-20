@@ -1,0 +1,6 @@
+1. Repasar codigo visto en clases.
+2. Modificar el diagrama de clases. Eliminar el destino de  la clase abstracta.
+3. Crear la clase origen y destino y relacionarlas con la/las clases del diagrama.
+    3b. Tener en cuenta, existe un unico origen y puede tener multiples destinos.
+    3c. Del origen y destino se conoce que ambos tienen un atributo de nombre y descripcion de tipo String
+4. Pasarlo a codigo.
