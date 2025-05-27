@@ -2,6 +2,7 @@ package paradigmas.poo.principios.abstraccion;
 
 public abstract class Mensajero {
     protected String destino;
+    protected Origen origen;
 
     public Mensajero(String destino) {
         this.destino = destino;
