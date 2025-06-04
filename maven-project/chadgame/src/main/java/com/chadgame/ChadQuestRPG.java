@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class ChadQuestRPG {
     public static void main(String[] args) {
 
-        System.out.println(MessageConstants.TITTLE_OF_GAME);
+        System.out.println(MessageConstants.TITLE_OF_GAME);
 
         LectorDeMisiones lector = new LectorDeMisiones(new Scanner(System.in));
         List<Mision> misiones = lector.leerMisiones(5);
