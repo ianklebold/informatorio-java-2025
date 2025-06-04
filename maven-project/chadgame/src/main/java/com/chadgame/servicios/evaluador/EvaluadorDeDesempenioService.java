@@ -8,5 +8,5 @@ public interface EvaluadorDeDesempenioService{
     //Firmas
     String evaluar(Jugador jugador);  //Firma
     String mensajeDeConstancia(Jugador jugador); //Firma
-    boolean tieneFallos(Jugador jugador); //Firma
+    String tieneFallos(Jugador jugador); //Firma
 }

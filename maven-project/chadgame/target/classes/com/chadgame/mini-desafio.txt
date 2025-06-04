@@ -1,0 +1,6 @@
+1. Si yo quisiera implementar la funcionalidad de buscar la mision con peor desempenio como lo haria?
+2. Si yo quisiera implementar la funcionalidad de buscar la mision con mejor desempenio como lo haria?
+3. Si yo quisiera implementar la funcionalidad de :
+    1. evaluar si la mejor mision menos la peor mision me da menos de 100
+    2. En caso de ser menor a 100 : Mostrar mensaje de "La mejor mision X estuvo a N distancias de la peor Mision Y"
+Como lo harias?

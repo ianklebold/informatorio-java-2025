@@ -28,7 +28,11 @@ public class EvaluadorDeDesempenioServiceImpl implements EvaluadorDeDesempenioSe
     }
 
     @Override
-    public boolean tieneFallos(Jugador jugador) {
-        return jugador.tieneMisionFallida();
+    public String tieneFallos(Jugador jugador) {
+        if( jugador.tieneMisionFallida() ){
+            return "Si, ha fallado en una mision";
+        }else{
+            return "No ha fallado en ninguna mision";
+        }
     }
 }

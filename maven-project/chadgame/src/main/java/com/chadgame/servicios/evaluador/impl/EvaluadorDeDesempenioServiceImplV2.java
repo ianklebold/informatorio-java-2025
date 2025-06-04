@@ -19,7 +19,7 @@ public class EvaluadorDeDesempenioServiceImplV2 implements EvaluadorDeDesempenio
     }
 
     @Override
-    public boolean tieneFallos(Jugador jugador) {
-        return false;
+    public String tieneFallos(Jugador jugador) {
+        return "";
     }
 }
