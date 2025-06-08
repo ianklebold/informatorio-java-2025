@@ -10,7 +10,7 @@ import com.opencsv.CSVWriter;
 
 public class ArchivosMisionesServiceImpl implements ArchivosMisionesService{
 
-    private final String UBICACION_ARCHIVO = "\\chadgame\\src\\main\\java\\com\\chadgame\\recursos\\";
+    private final String UBICACION_ARCHIVO = "\\src\\main\\java\\com\\chadgame\\recursos\\";
 
     CSVWriter csvWriter;
 
