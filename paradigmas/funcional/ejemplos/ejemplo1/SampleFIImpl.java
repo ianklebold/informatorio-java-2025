@@ -14,9 +14,9 @@ public class SampleFIImpl {
         //Con JAVA 8 - Expresion lambda
 
         //Creacion de las funciones
-        SampleFI lambdaI = () -> System.out.println("Lambda version");
+        SampleFI lambdaI = () -> System.out.println("Lambda version 1");
 
-        SampleFI lambdaI2 = () -> System.out.println("Lambda version");
+        SampleFI lambdaI2 = () -> System.out.println("Lambda version 2");
 
         //Ejecucion
         lambdaI.m();

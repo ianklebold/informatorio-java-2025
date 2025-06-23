@@ -1,7 +1,6 @@
 package interfaces.functions;
 
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 
 public class BiFunctionTest {
     public static void main(String[] args) {
