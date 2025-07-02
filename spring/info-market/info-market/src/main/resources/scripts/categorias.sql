@@ -1,0 +1,10 @@
+INSERT INTO categoria (id, nombre) VALUES (1, 'Electrónica');
+INSERT INTO categoria (id, nombre) VALUES (2, 'Ropa');
+INSERT INTO categoria (id, nombre) VALUES (3, 'Hogar y Cocina');
+INSERT INTO categoria (id, nombre) VALUES (4, 'Deportes');
+INSERT INTO categoria (id, nombre) VALUES (5, 'Libros');
+INSERT INTO categoria (id, nombre) VALUES (6, 'Salud y Belleza');
+INSERT INTO categoria (id, nombre) VALUES (7, 'Juguetes');
+INSERT INTO categoria (id, nombre) VALUES (8, 'Automotriz');
+INSERT INTO categoria (id, nombre) VALUES (9, 'Mascotas');
+INSERT INTO categoria (id, nombre) VALUES (10, 'Oficina y Papelería');

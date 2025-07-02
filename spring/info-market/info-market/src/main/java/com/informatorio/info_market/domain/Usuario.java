@@ -9,35 +9,38 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Producto {
-
+public class Usuario {
     @Id
     @GeneratedValue(generator = "UUID")
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(length = 36, columnDefinition = "varchar(36)", nullable = false, updatable = false)
     private UUID id;
 
+    @Column(nullable = false, unique = true, updatable = false)
+    private int dni;
+
+    @Column(nullable = false, length = 50)
     private String nombre;
-    private String descripcion;
-    private double precio;
-    private int stock;
+
+    @Column(nullable = false, length = 50)
+    private String apellido;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Carrito> carritos;
+
     private LocalDate fechaDeCreacion;
     private LocalDate fechaActualizacion;
 
-    @ManyToMany
-    private List<Categoria> categorias;
+    public Usuario() {}
 
-    public Producto() {}
-
-    public Producto(UUID id, String nombre, String descripcion, double precio, int stock, LocalDate fechaDeCreacion, LocalDate fechaActualizacion, List<Categoria> categorias) {
+    public Usuario(UUID id, int dni, String nombre, String apellido, List<Carrito> carritos, LocalDate fechaDeCreacion, LocalDate fechaActualizacion) {
         this.id = id;
+        this.dni = dni;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
+        this.apellido = apellido;
+        this.carritos = carritos;
         this.fechaDeCreacion = fechaDeCreacion;
         this.fechaActualizacion = fechaActualizacion;
-        this.categorias = categorias;
     }
 
     public UUID getId() {
@@ -48,6 +51,14 @@ public class Producto {
         this.id = id;
     }
 
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -56,28 +67,20 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public double getPrecio() {
-        return precio;
+    public List<Carrito> getCarritos() {
+        return carritos;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setCarritos(List<Carrito> carritos) {
+        this.carritos = carritos;
     }
 
     public LocalDate getFechaDeCreacion() {
@@ -94,13 +97,5 @@ public class Producto {
 
     public void setFechaActualizacion(LocalDate fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
     }
 }
