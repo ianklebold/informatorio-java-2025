@@ -1,7 +1,9 @@
 package com.informatorio.info_market.service.producto.impl;
 
 import com.informatorio.info_market.domain.Producto;
+import com.informatorio.info_market.dto.producto.ProductoCreateDto;
 import com.informatorio.info_market.dto.producto.ProductoDto;
+import com.informatorio.info_market.mapper.producto.ProductoCreateMapper;
 import com.informatorio.info_market.mapper.producto.ProductoMapper;
 import com.informatorio.info_market.repository.producto.ProductoRepository;
 import com.informatorio.info_market.service.producto.ProductoService;
@@ -21,6 +23,8 @@ public class ProductoServiceImpl implements ProductoService {
     private final ProductoRepository productoRepository;
 
     private final ProductoMapper productoMapper;
+
+    private final ProductoCreateMapper productoCreateMapper;
 
     @Override
     public List<ProductoDto> getAllProductos(int minStock, Double minPrice, Double maxPrice) {
@@ -53,13 +57,33 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Producto createProducto(Producto producto) {
+    public ProductoDto createProducto(ProductoCreateDto producto) {
+        Producto productoToCreate = productoCreateMapper.productDtoCreateToProducto(producto);
 
-        producto.setFechaDeCreacion(LocalDate.now());
-        producto.setFechaActualizacion(LocalDate.now());
-        productoRepository.save(producto);
+        productoToCreate.setFechaDeCreacion(LocalDate.now());
+        productoToCreate.setFechaActualizacion(LocalDate.now());
 
-        return producto;
+        return productoMapper.productoToProductoDto( productoRepository.save(productoToCreate) ) ;
+    }
+
+    @Override
+    public ProductoDto updateProducto(ProductoCreateDto producto, UUID idProducto) {
+
+        Optional<Producto> productoToUpdate = productoRepository.findById(idProducto);
+
+        if (productoToUpdate.isPresent()){
+            Producto productoUpdated = productoCreateMapper.productDtoCreateToProducto(producto);
+
+            productoUpdated.setId( productoToUpdate.get().getId() );
+            productoUpdated.setFechaDeCreacion( productoToUpdate.get().getFechaDeCreacion() );
+            productoUpdated.setFechaActualizacion(LocalDate.now());
+
+            productoRepository.save(productoUpdated);
+            return productoMapper.productoToProductoDto(productoUpdated);
+
+        }
+
+        return null;
     }
 
     @Override

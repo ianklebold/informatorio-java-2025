@@ -1,6 +1,7 @@
 package com.informatorio.info_market.service.producto;
 
 import com.informatorio.info_market.domain.Producto;
+import com.informatorio.info_market.dto.producto.ProductoCreateDto;
 import com.informatorio.info_market.dto.producto.ProductoDto;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public interface ProductoService {
 
     ProductoDto getProductoById(UUID id);
 
-    Producto createProducto(Producto producto);
+    ProductoDto createProducto(ProductoCreateDto producto);
+
+    ProductoDto updateProducto(ProductoCreateDto producto, UUID idProducto);
 
     void deleteProducto(UUID id);
 }

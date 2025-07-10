@@ -1,6 +1,7 @@
 package com.informatorio.info_market.controller.producto;
 
 import com.informatorio.info_market.domain.Producto;
+import com.informatorio.info_market.dto.producto.ProductoCreateDto;
 import com.informatorio.info_market.dto.producto.ProductoDto;
 import com.informatorio.info_market.service.producto.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,16 @@ public class ProductoController {
     }
 
     @PostMapping()
-    public Producto createProducto(@RequestBody Producto producto) {
+    public ProductoDto createProducto(@RequestBody ProductoCreateDto producto) {
         return productoService.createProducto(producto);
+    }
+
+    @PutMapping("/{productoId}")
+    public ProductoDto updateProducto(
+            @RequestBody ProductoCreateDto producto,
+            @PathVariable UUID productoId
+    ) {
+        return productoService.updateProducto(producto, productoId);
     }
 
     @GetMapping("/{productoId}")
