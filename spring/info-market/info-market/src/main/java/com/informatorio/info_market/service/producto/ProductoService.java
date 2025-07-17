@@ -12,9 +12,13 @@ public interface ProductoService {
 
     ProductoDto getProductoById(UUID id);
 
+    Producto getProductoEntityById(UUID id);
+
     ProductoDto createProducto(ProductoCreateDto producto);
 
     ProductoDto updateProducto(ProductoCreateDto producto, UUID idProducto);
+
+    void descontarStock(Producto producto, int cantidad);
 
     void deleteProducto(UUID id);
 }

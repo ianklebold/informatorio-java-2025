@@ -3,12 +3,13 @@ package com.informatorio.info_market.service.producto.impl;
 import com.informatorio.info_market.domain.Producto;
 import com.informatorio.info_market.dto.producto.ProductoCreateDto;
 import com.informatorio.info_market.dto.producto.ProductoDto;
+import com.informatorio.info_market.exception.badrequest.StockInsuficienteException;
+import com.informatorio.info_market.exception.notfound.NotFoundException;
 import com.informatorio.info_market.mapper.producto.ProductoCreateMapper;
 import com.informatorio.info_market.mapper.producto.ProductoMapper;
 import com.informatorio.info_market.repository.producto.ProductoRepository;
 import com.informatorio.info_market.service.producto.ProductoService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -48,12 +49,22 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public ProductoDto getProductoById(UUID id) {
-
         Optional<Producto> producto = productoRepository.findById(id);
         if (producto.isPresent()) {
             return productoMapper.productoToProductoDto( producto.get() );
+        }else{
+            throw new NotFoundException("No se encontro el producto con id : " + id);
         }
-        return null;
+    }
+
+    @Override
+    public Producto getProductoEntityById(UUID id) {
+        Optional<Producto> producto = productoRepository.findById(id);
+        if (producto.isPresent()) {
+            return  producto.get() ;
+        }else{
+            throw new NotFoundException("No se encontro el producto con id : " + id);
+        }
     }
 
     @Override
@@ -81,14 +92,31 @@ public class ProductoServiceImpl implements ProductoService {
             productoRepository.save(productoUpdated);
             return productoMapper.productoToProductoDto(productoUpdated);
 
+        }else{
+            throw new NotFoundException("No se encontro el producto con id : " + idProducto);
         }
 
-        return null;
+    }
+
+    @Override
+    public void descontarStock(Producto producto, int cantidad) {
+        if ( producto.getStock() < cantidad ){
+            //Ejecutar excepcion
+            throw new StockInsuficienteException("No existe stock suficiente del producto");
+        }else {
+            producto.setStock(producto.getStock() - cantidad);
+            productoRepository.save(producto);
+        }
     }
 
     @Override
     public void deleteProducto(UUID id) {
-        productoRepository.deleteById(id);
+
+        if (productoRepository.existsById( id )){
+            productoRepository.deleteById(id);
+        }
+
+        throw new NotFoundException("No se encontro el producto con id : " + id);
     }
 
 }

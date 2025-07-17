@@ -22,7 +22,9 @@ public class Producto {
     @Column(length = 36, columnDefinition = "varchar(36)", nullable = false, updatable = false)
     private UUID id;
 
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String descripcion;
     private double precio;
     private int stock;

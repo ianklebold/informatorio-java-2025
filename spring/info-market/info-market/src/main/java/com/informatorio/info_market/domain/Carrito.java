@@ -6,6 +6,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,8 +22,8 @@ public class Carrito {
     @Enumerated(EnumType.STRING)
     private EstadoCarritoEnum estadoCarrito;
 
-    @ManyToMany
-    private List<Producto> productos;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "carrito")
+    private List<ItemCarrito> itemsCarritos = new ArrayList<>();
 
     @OneToOne
     private Factura factura;
@@ -37,10 +38,10 @@ public class Carrito {
     public Carrito() {
     }
 
-    public Carrito(UUID id, EstadoCarritoEnum estadoCarrito, List<Producto> productos, Factura factura, Usuario usuario, LocalDate fechaDeCreacion, LocalDate fechaActualizacion) {
+    public Carrito(UUID id, EstadoCarritoEnum estadoCarrito, List<ItemCarrito> items, Factura factura, Usuario usuario, LocalDate fechaDeCreacion, LocalDate fechaActualizacion) {
         this.id = id;
         this.estadoCarrito = estadoCarrito;
-        this.productos = productos;
+        this.itemsCarritos = items;
         this.factura = factura;
         this.usuario = usuario;
         this.fechaDeCreacion = fechaDeCreacion;
@@ -63,12 +64,12 @@ public class Carrito {
         this.estadoCarrito = estadoCarrito;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<ItemCarrito> getItemsCarritos() {
+        return itemsCarritos;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setItemsCarritos(List<ItemCarrito> itemsCarritos) {
+        this.itemsCarritos = itemsCarritos;
     }
 
     public Usuario getUsuario() {
