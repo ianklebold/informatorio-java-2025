@@ -119,4 +119,16 @@ public class ProductoServiceImpl implements ProductoService {
         throw new NotFoundException("No se encontro el producto con id : " + id);
     }
 
+    @Override
+    public List<ProductoDto> testProductsQueries() {
+
+        List<Producto> productos;
+
+        productos = productoRepository.obtenerTodosLosProductosConNombreCategoriaNative("Deportes");
+
+        return productos.stream()
+                .map(productoMapper::productoToProductoDto)
+                .toList();
+    }
+
 }

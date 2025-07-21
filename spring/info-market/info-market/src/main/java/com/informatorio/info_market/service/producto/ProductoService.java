@@ -21,4 +21,6 @@ public interface ProductoService {
     void descontarStock(Producto producto, int cantidad);
 
     void deleteProducto(UUID id);
+
+    List<ProductoDto> testProductsQueries();
 }

@@ -69,5 +69,10 @@ public class ProductoController {
         ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/query")
+    public List<ProductoDto> testProductsQueries(){
+        return productoService.testProductsQueries();
+    }
+
 
 }
