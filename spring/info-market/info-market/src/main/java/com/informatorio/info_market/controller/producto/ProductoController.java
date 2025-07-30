@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,27 @@ public class ProductoController {
             @RequestParam(value = "maxPrice", defaultValue = "0" ,required = false) Double maxPrice
     ) {
         return productoService.getAllProductos(minStock, minPrice, maxPrice);
+    }
+
+    @Operation(
+            summary = "Get productos paginados",
+            description = "REST API para obtener todos los productos mediante paginacion."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Request Success"
+            )
+    })
+    @GetMapping("/paged")
+    public Page<ProductoDto> getAllProductos(
+            @RequestParam(value = "minStock", defaultValue = "0", required = false) int minStock,
+            @RequestParam(value = "minPrice", defaultValue = "0", required = false) Double minPrice,
+            @RequestParam(value = "maxPrice", defaultValue = "0" ,required = false) Double maxPrice,
+            @RequestParam(value = "pageNumber", defaultValue = "0" ,required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "0" ,required = false) Integer pageSize
+    ) {
+        return productoService.getAllProductos(minStock, minPrice, maxPrice,pageNumber,pageSize);
     }
 
 

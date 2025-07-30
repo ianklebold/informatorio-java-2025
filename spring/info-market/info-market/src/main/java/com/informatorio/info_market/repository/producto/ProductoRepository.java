@@ -1,6 +1,8 @@
 package com.informatorio.info_market.repository.producto;
 
 import com.informatorio.info_market.domain.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +21,12 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
 
     //Filtrar por min stock
     List<Producto> findAllByStockIsGreaterThan(int stockMin);
+
+    Page<Producto> findAllByStockIsGreaterThanAndPrecioIsBetween(int stockMin, Double minPrice, Double maxPrice, Pageable pageable);
+
+    Page<Producto> findAllByPrecioIsLessThan(Double precio, Pageable pageable);
+
+    Page<Producto> findAllByStockIsGreaterThan(int stockMin, Pageable pageable);
 
     //HQL
     @Query("SELECT p FROM Producto p WHERE p.precio > :minPrecio")

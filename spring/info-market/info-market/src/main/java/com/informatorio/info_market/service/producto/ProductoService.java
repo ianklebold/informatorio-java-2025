@@ -3,12 +3,15 @@ package com.informatorio.info_market.service.producto;
 import com.informatorio.info_market.domain.Producto;
 import com.informatorio.info_market.dto.producto.ProductoCreateDto;
 import com.informatorio.info_market.dto.producto.ProductoDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ProductoService {
     List<ProductoDto> getAllProductos(int minStock, Double minPrice, Double maxPrice);
+
+    Page<ProductoDto> getAllProductos(int minStock, Double minPrice, Double maxPrice,Integer pageNumber,Integer pageSize);
 
     ProductoDto getProductoById(UUID id);
 

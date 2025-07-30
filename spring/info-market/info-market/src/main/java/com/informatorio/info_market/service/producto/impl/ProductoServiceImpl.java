@@ -8,8 +8,11 @@ import com.informatorio.info_market.exception.notfound.NotFoundException;
 import com.informatorio.info_market.mapper.producto.ProductoCreateMapper;
 import com.informatorio.info_market.mapper.producto.ProductoMapper;
 import com.informatorio.info_market.repository.producto.ProductoRepository;
+import com.informatorio.info_market.service.pagerequest.PageRequestService;
 import com.informatorio.info_market.service.producto.ProductoService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,6 +29,10 @@ public class ProductoServiceImpl implements ProductoService {
     private final ProductoMapper productoMapper;
 
     private final ProductoCreateMapper productoCreateMapper;
+
+    private final PageRequestService pageRequestService;
+
+    private static final String PROPERTY_SORT = "precio";
 
     @Override
     public List<ProductoDto> getAllProductos(int minStock, Double minPrice, Double maxPrice) {
@@ -45,6 +52,30 @@ public class ProductoServiceImpl implements ProductoService {
         return productos.stream()
                         .map( producto -> productoMapper.productoToProductoDto( producto ) )
                         .toList();
+    }
+
+    @Override
+    public Page<ProductoDto> getAllProductos(int minStock, Double minPrice, Double maxPrice, Integer pageNumber, Integer pageSize) {
+
+        PageRequest pageRequest = pageRequestService.buildPageRequest(pageNumber, pageSize, PROPERTY_SORT );
+
+        Page<Producto> productos;
+
+        if(minStock == 0 && maxPrice == 0 ){
+            productos = productoRepository.findAll(pageRequest);
+        } else if (minStock > 0 && maxPrice > 0) {
+            productos = productoRepository.findAllByStockIsGreaterThanAndPrecioIsBetween(minStock, minPrice, maxPrice,pageRequest);
+        } else if (maxPrice > 0) {
+            //Filtrar por maxPrice
+            productos = productoRepository.findAllByPrecioIsLessThan(maxPrice,pageRequest);
+        }else {
+            productos = productoRepository.findAllByStockIsGreaterThan(minStock,pageRequest);
+        }
+
+
+        return productos.map(
+                producto -> productoMapper.productoToProductoDto( producto )
+        );
     }
 
     @Override
